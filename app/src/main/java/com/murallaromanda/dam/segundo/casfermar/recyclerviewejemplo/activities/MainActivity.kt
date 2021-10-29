@@ -5,31 +5,33 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.murallaromanda.dam.segundo.casfermar.recyclerviewejemplo.R
+import com.murallaromanda.dam.segundo.casfermar.recyclerviewejemplo.adapters.ListaPersonajesAdapters
 import com.murallaromanda.dam.segundo.casfermar.recyclerviewejemplo.databinding.ActivityMainBinding
+import com.murallaromanda.dam.segundo.casfermar.recyclerviewejemplo.models.data.PersonajesData
+import com.murallaromanda.dam.segundo.casfermar.recyclerviewejemplo.models.data.PersonajesDataMockImpl
 import com.murallaromanda.dam.segundo.casfermar.recyclerviewejemplo.models.entities.Personaje
 
-class RecyclerView : AppCompatActivity(){
+class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
+
+        //Inflamos el layout
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val rvListaPersonaje: RecyclerView = binding.rvListaPersonajes
 
-        //Tipo de layout
+        //Datos de los personajes
+        val personajeData = PersonajesDataMockImpl()
+        val lista = personajeData.getLista()
+        //Creando los componentes para el recycler
         val layoutManager = LinearLayoutManager(this)
-        //Datos de prueba
-        val gotCharacterList = listOf(
-            Personaje(0,"Daenerys", "Targaryen", "Mother of Dragons", "House Targaryen","www"),
-            Personaje(0,"Samwell", "Tarly", "Maester", "House Tarly","www"),
-            Personaje(0,"Arya", "Stark", "No One", "House Stark","www"),
-            Personaje(0,"Brienne", "Tarth", "Briene of Tarth", "Tarth","www")
-        )
+        val adapter = ListaPersonajesAdapters(lista)
 
-
+        //Asociacion de los datos con los componentes
+        binding.rvListaPersonajes.layoutManager = layoutManager
+        binding.rvListaPersonajes.adapter = adapter
     }
 
 
