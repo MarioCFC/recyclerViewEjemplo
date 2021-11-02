@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity(){
         //Asociacion de los datos con los componentes
         binding.rvListaPersonajes.layoutManager = layoutManager
         binding.rvListaPersonajes.adapter = adapter
+
+        //Esto es opcional y solo en caso de que la lista no cambie, optimiza el rendimiento de la visualizacion de la lista, creo
+        binding.rvListaPersonajes.setHasFixedSize(true)
     }
 
 
